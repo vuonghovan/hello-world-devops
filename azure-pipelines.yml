@@ -21,12 +21,13 @@ steps:
     feedsToUse: 'select'
     includeNuGetOrg: true
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet run build $(buildConfiguration)'
   inputs:
     command: 'build'
     projects: '**/*HelloWorld/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-  displayName: 'dotnet run build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: Release
   inputs:
     command: publish
     publishWebProjects: True
