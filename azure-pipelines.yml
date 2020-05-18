@@ -14,10 +14,12 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: dotnet restore
   inputs:
-    command: 'restore'
+    command: restore
+    projects: '**/*HelloWorld/*.csproj'
     feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+    includeNuGetOrg: true
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
