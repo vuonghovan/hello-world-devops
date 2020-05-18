@@ -4,14 +4,34 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
+  SKIP_CI_FILTER: 'skip ci'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
+  displayName: dotnet restore
+  inputs:
+    command: restore
+    projects: '**/*HelloWorld/*.csproj'
+    feedsToUse: 'select'
+    includeNuGetOrg: true
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet run build $(buildConfiguration)'
+  inputs:
+    command: 'build'
+    projects: '**/*HelloWorld/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Release
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
