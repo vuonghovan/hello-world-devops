@@ -11,9 +11,11 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  SKIP_CI_FILTER: 'skip ci'
 
 steps:
 - task: DotNetCoreCLI@2
+  condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
   displayName: dotnet restore
   inputs:
     command: restore
