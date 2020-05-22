@@ -16,13 +16,19 @@ variables:
   SKIP_CI_FILTER: 'skip ci'
 
 steps:
-- task: CmdLine@2
+- task: Npm@1
   inputs:
-    script: |
-      npm install
-      npm run build
-    workingDirectory: 'HelloWorld/HelloWorld'
-
+    command: 'install'
+    workingDir: 'HelloWorld/HelloWorld'
+    customRegistry: 'useFeed'
+    customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'HelloWorld/HelloWorld'
+    customCommand: 'run build'
+    customRegistry: 'useFeed'
+    customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
 - task: DotNetCoreCLI@2
   condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
   displayName: dotnet restore
