@@ -21,6 +21,7 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install NodeJS 10.x'
 - script: |
+    cd HelloWorld/HelloWorld
     npm install
     npm run build
   displayName: 'npm install and build'
