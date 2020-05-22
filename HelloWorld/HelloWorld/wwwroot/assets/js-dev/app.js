@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\n\n//# sourceURL=webpack:///./assets/app.js?");
+eval("$(document).ready(function(){\r\n    \r\n});\n\n//# sourceURL=webpack:///./assets/app.js?");
 
 /***/ })
 

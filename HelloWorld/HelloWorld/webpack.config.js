@@ -54,7 +54,6 @@ var config = (env, options) => {
                 },
                 {
                     test: /\.js(x)?$/,
-                    enforce: 'pre',
                     exclude: /(node_modules|wwwroot)/,
                     use: {
                         loader: 'eslint-loader',
