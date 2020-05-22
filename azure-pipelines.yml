@@ -19,7 +19,5 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: 'HelloWorld/HelloWorld/'
-    customCommand: ' run-script build'
-    customRegistry: 'useFeed'
-    customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
+    workingDir: 'export PATH="/home/vsts/.local/bin:$PATH"'
+    customCommand: 'run-script build'
