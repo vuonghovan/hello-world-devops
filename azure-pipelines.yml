@@ -18,37 +18,8 @@ variables:
 steps:
 - task: Npm@1
   inputs:
-    command: 'install'
-    workingDir: 'HelloWorld/HelloWorld'
-    customRegistry: 'useFeed'
-    customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
-- task: Npm@1
-  inputs:
     command: 'custom'
-    workingDir: 'HelloWorld/HelloWorld'
+    workingDir: '**/*HelloWorld/'
     customCommand: ' run-script build'
     customRegistry: 'useFeed'
     customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
-- task: DotNetCoreCLI@2
-  condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
-  displayName: dotnet restore
-  inputs:
-    command: restore
-    projects: '**/*HelloWorld/*.csproj'
-    feedsToUse: 'select'
-    includeNuGetOrg: true
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet run build $(buildConfiguration)'
-  inputs:
-    command: 'build'
-    projects: '**/*HelloWorld/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: Release
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-- task: PublishBuildArtifacts@1
-  displayName: 'publish artifacts'
