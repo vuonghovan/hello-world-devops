@@ -26,7 +26,7 @@ steps:
   inputs:
     command: 'custom'
     workingDir: 'HelloWorld/HelloWorld'
-    customCommand: 'run build'
+    customCommand: ' run-script build'
     customRegistry: 'useFeed'
     customFeed: '7de59692-4d6b-49d0-8855-2bd89168b84d'
 - task: DotNetCoreCLI@2
