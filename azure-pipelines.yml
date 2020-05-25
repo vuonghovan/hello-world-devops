@@ -14,6 +14,17 @@ variables:
   SKIP_CI_FILTER: 'skip ci'
 
 steps:
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'HelloWorld/HelloWorld'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'HelloWorld/HelloWorld'
+    customCommand: 'run-script build'
+
 - task: DotNetCoreCLI@2
   condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
   displayName: dotnet restore
