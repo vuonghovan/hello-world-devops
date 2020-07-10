@@ -6,21 +6,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HelloWorld.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HelloWorld.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            var model = new CreateViewModel
+            {
+                Name = "Hello World"
+            };
+
+            return View(model);
+        }
+
+        public ActionResult Create()
+        {
             return View();
+        }
+        [HttpPost("Create")]
+        public ActionResult Create(CreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                //Save the model
+                return View(nameof(Create), model);
+            }
+
+            //if (model.Name.Length >= 20)
+            //    throw new Exception("Max length is 9");
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
