@@ -1,0 +1,51 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  SKIP_CI_FILTER: 'skip ci'
+
+steps:
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'HelloWorld/HelloWorld'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: 'HelloWorld/HelloWorld'
+    customCommand: 'run-script build'
+
+- task: DotNetCoreCLI@2
+  condition: not(contains(variables['Build.SourceVersionMessage'], variables['SKIP_CI_FILTER']))
+  displayName: dotnet restore
+  inputs:
+    command: restore
+    projects: '**/*HelloWorld/*.csproj'
+    feedsToUse: 'select'
+    includeNuGetOrg: true
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet run build $(buildConfiguration)'
+  inputs:
+    command: 'build'
+    projects: '**/*HelloWorld/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Release
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+  
