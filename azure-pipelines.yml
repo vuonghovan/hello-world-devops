@@ -16,10 +16,12 @@ variables:
 steps:
 
 - task: Npm@1
+  displayName: npm install
   inputs:
     command: 'install'
     workingDir: 'HelloWorld/HelloWorld'
 - task: Npm@1
+  displayName: npm run build
   inputs:
     command: 'custom'
     workingDir: 'HelloWorld/HelloWorld'
@@ -33,6 +35,12 @@ steps:
     projects: '**/*HelloWorld/*.csproj'
     feedsToUse: 'select'
     includeNuGetOrg: true
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: 'test'
+    projects: '**/*HelloWorld.Test/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet run build $(buildConfiguration)'
   inputs:
