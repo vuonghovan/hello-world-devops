@@ -1,0 +1,17 @@
+[Unit]
+Description=Demo ASP.Net Project
+
+[Service]
+WorkingDirectory=/home/vhost/www/demo
+ExecStart=/usr/bin/dotnet /home/vhost/www/demo/HelloWorld.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=DemoProject
+User=nginx
+Environment=ASPNETCORE_ENVIRONMENT=Production
+#Environment=ASPNETCORE_URLS=http://localhost:5000
+#Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+#EnvironmentFile=/etc/nginx/conf.d/demo.conf
+
+[Install]
+WantedBy=multi-user.target
