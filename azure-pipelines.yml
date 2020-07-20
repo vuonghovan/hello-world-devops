@@ -14,7 +14,6 @@ variables:
   SKIP_CI_FILTER: 'skip ci'
 
 steps:
-
 - task: Npm@1
   displayName: npm install
   inputs:
