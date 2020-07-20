@@ -23,9 +23,6 @@ namespace HelloWorld
                 {
                     webBuilder.ConfigureKestrel(serverOptions =>
                     {
-
-                        serverOptions.Listen(IPAddress.Loopback, 6000);
-
                     })
                     .UseStartup<Startup>();
                 });
