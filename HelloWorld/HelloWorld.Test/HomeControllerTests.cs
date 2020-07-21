@@ -27,7 +27,7 @@ namespace HelloWorld.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Hello World", model.Name);
+            Assert.AreEqual("Hello", model.Name);
         }
 
         [Test]
