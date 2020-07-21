@@ -1,4 +1,4 @@
-using HelloWorld.Controllers;
+﻿using HelloWorld.Controllers;
 using HelloWorld.Models;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
@@ -17,7 +17,6 @@ namespace HelloWorld.Test
             _homeController = new HomeController();
         }
 
-
         [Test]
         public void Index_Is_Valid_Return_View()
         {
@@ -27,25 +26,23 @@ namespace HelloWorld.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Hello", model.Name);
+            Assert.AreEqual("Hello World", model.Name);
         }
 
         [Test]
-        public void Create_ViewState_Is_Valid_Returns_RedirectToRouteResult()
+        public void Post_Is_Valid_Return_Redirecto_To_Index()
         {
-            // Arrage
-            _homeController.ViewData.ModelState.Clear();
-
-            CreateViewModel viewModel = new CreateViewModel()
+            var model = new CreateViewModel
             {
-                Name = "Hello World"
+                Name = "Hello World",
             };
 
-            // Act
-            var actual = _homeController.Create(viewModel) as RedirectToActionResult;
+            // Act 
+            var result = (RedirectToActionResult)_homeController.Create(model);
 
-            //Asset
-            Assert.AreEqual("Index", actual.ActionName);
+            //Assert
+            Assert.AreEqual("Index", result.ActionName);
         }
+
     }
 }

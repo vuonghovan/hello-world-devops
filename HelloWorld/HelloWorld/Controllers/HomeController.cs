@@ -32,11 +32,11 @@ namespace HelloWorld.Controllers
             if (!ModelState.IsValid)
             {
                 //Save the model
-                return View(nameof(Create), model);
+                return View(model);
             }
 
-            //if (model.Name.Length >= 20)
-            //    throw new Exception("Max length is 9");
+            if (model.Name.Length > 15)
+                throw new Exception("Max length is 15");
 
             return RedirectToAction(nameof(Index));
         }
