@@ -40,6 +40,9 @@ steps:
     command: 'test'
     projects: '**/*HelloWorld.Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+- task: PublishTestResultScreenshot@0
+  inputs:
+    organization: 'https://dev.azure.com/vuonghovan94'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet run build $(buildConfiguration)'
   inputs:
