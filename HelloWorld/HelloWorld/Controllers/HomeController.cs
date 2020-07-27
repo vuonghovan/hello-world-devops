@@ -38,7 +38,18 @@ namespace HelloWorld.Controllers
             if (model.Name.Length > 15)
                 throw new Exception("Max length is 15");
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Edit), new { model.Name });
+        }
+
+        [HttpGet("Edit")]
+        public ActionResult Edit(string Name)
+        {
+            var model = new CreateViewModel
+            {
+                Name = Name
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()

@@ -3,34 +3,38 @@ using OpenQA.Selenium.Chrome;
 using System;
 using Xunit;
 using OpenQA.Selenium.Support.UI;
+using System.Linq;
 
 namespace HelloWorld.Selenium
 {
     public class AutomatedUITests : IDisposable
     {
-        private readonly IWebDriver _driver;
-
-
-        public AutomatedUITests()
-        {
-            _driver = new ChromeDriver();
-        }
+        private IWebDriver _driver;
 
         public void Dispose()
         {
             _driver.Quit();
             _driver.Dispose();
         }
-   //     https://swimburger.net/blog/dotnet/how-to-ui-test-using-selenium-and-net-core-on-windows-ubuntu-and-maybe-macos
+
         [Fact]
         public void Create_WhenExecuted_Return_RedirectToIndex()
         {
-            _driver.Navigate().GoToUrl("https://localhost:44305/home/create/");
-            _driver.FindElement(By.ClassName("name")).SendKeys("name");
-            //_driver.FindElement(By.Id("btnCreate")).Click();
+            // Init
+            string strTestInValid = "Azure DevOps Sharing!";
+            string strTestValid = "Azure DevOps!";
 
-            //Assert.Equal("Create - EmployeesApp", _driver.Title);
-            //Assert.Contains("Please provide a new employee data", _driver.PageSource);
+            _driver = new ChromeDriver("C:\\IT\\hello-world-devops\\HelloWorld\\HelloWorld.Selenium");
+            _driver.Navigate().GoToUrl("http://localhost:5000/home/create/");
+
+            //Action
+            _driver.FindElement(By.Id("Name")).SendKeys(strTestValid);
+            _driver.FindElement(By.Id("btnCreate")).Click();
+
+            // Assert
+            var element = _driver.FindElement(By.Id("Name"));
+            Assert.NotNull(element);
+            Assert.Equal(strTestValid, element.GetAttribute("value"));
         }
     }
 }

@@ -41,7 +41,7 @@ namespace HelloWorld.Test
             var result = (RedirectToActionResult)_homeController.Create(model);
 
             //Assert
-            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Edit", result.ActionName);
         }
 
     }
