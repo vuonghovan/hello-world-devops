@@ -26,7 +26,7 @@ namespace HelloWorld.Selenium
         [Test]
         public void Create_WhenExecuted_Return_RedirectToIndex()
         {
-            string strTestInValid = "Azure DevOps Sharing!";
+            string strTestInValid = "This is case of invalid!";
             string strTestValid = "Azure DevOps!";
             _driver.Navigate().GoToUrl(_url);
 
@@ -36,7 +36,7 @@ namespace HelloWorld.Selenium
 
             var element = _driver.FindElement(By.Id("Name"));
             //Assert
-            Assert.AreEqual(strTestInValid, element.GetAttribute("value"));
+            Assert.AreEqual("Azure DevOps!", element.GetAttribute("value"));
         }
     }
 }

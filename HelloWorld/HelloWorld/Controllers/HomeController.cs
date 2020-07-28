@@ -16,7 +16,7 @@ namespace HelloWorld.Controllers
         {
             var model = new CreateViewModel
             {
-                Name = "Hello World"
+                Name = "Azure DevOps!"
             };
 
             return View(model);
@@ -31,12 +31,14 @@ namespace HelloWorld.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //Save the model
                 return View(model);
             }
 
             if (model.Name.Length > 15)
-                throw new Exception("Max length is 15");
+            {
+                ModelState.AddModelError(nameof(model.Name), "Max length is 15");
+                return View(model);
+            }
 
             return RedirectToAction(nameof(Edit), new { model.Name });
         }

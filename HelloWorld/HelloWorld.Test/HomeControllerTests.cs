@@ -20,28 +20,35 @@ namespace HelloWorld.Test
         [Test]
         public void Index_Is_Valid_Return_View()
         {
+            string strTestInValid = "This is case of invalid!";
+            string strTestValid = "Azure DevOps!";
+
             // Act 
             var result = _homeController.Index() as ViewResult;
             var model = result.Model as CreateViewModel;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Hello World", model.Name);
+            Assert.AreEqual(strTestValid, model.Name);
         }
 
         [Test]
         public void Post_Is_Valid_Return_Redirecto_To_Index()
         {
+            string strTestInValid = "Azure DevOps Sharing!";
+            string strTestValid = "Azure DevOps!";
+
             var model = new CreateViewModel
             {
-                Name = "Hello World",
+                Name = strTestValid,
             };
 
             // Act 
-            var result = (RedirectToActionResult)_homeController.Create(model);
+            var result = _homeController.Create(model);
 
             //Assert
-            Assert.AreEqual("Edit", result.ActionName);
+            Assert.IsTrue(result is RedirectToActionResult);
+            Assert.AreEqual("Edit", ((RedirectToActionResult)result).ActionName);
         }
 
     }
