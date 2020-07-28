@@ -25,7 +25,7 @@ namespace HelloWorld.Selenium
             string strTestValid = "Azure DevOps!";
 
             _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl("https://qa-hello-world.azurewebsites.net/");
+            _driver.Navigate().GoToUrl("https://qa-hello-world.azurewebsites.net/home/create");
 
             //Action
             _driver.FindElement(By.Id("Name")).SendKeys(strTestValid);
