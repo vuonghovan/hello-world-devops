@@ -1,12 +1,11 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using Xunit;
-using OpenQA.Selenium.Support.UI;
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HelloWorld.Selenium
 {
+    [TestClass]
     public class AutomatedUITests : IDisposable
     {
         private IWebDriver _driver;
@@ -17,7 +16,7 @@ namespace HelloWorld.Selenium
             _driver.Dispose();
         }
 
-        [Fact]
+        [TestMethod]
         public void Create_WhenExecuted_Return_RedirectToIndex()
         {
             // Init
@@ -31,10 +30,8 @@ namespace HelloWorld.Selenium
             _driver.FindElement(By.Id("Name")).SendKeys(strTestValid);
             _driver.FindElement(By.Id("btnCreate")).Click();
 
-            // Assert
             var element = _driver.FindElement(By.Id("Name"));
-            Assert.NotNull(element);
-            Assert.Equal(strTestValid, element.GetAttribute("value"));
+            Assert.AreEqual(strTestValid, element.GetAttribute("value"));
         }
     }
 }
