@@ -28,13 +28,13 @@ namespace HelloWorld.Selenium
             _driver.Navigate().GoToUrl("http://localhost:5000/home/create/");
 
             //Action
-            _driver.FindElement(By.Id("Name")).SendKeys(strTestValid);
+            _driver.FindElement(By.Id("Name")).SendKeys(strTestInValid);
             _driver.FindElement(By.Id("btnCreate")).Click();
 
             // Assert
             var element = _driver.FindElement(By.Id("Name"));
             Assert.NotNull(element);
-            Assert.Equal(strTestValid, element.GetAttribute("value"));
+            Assert.Equal(strTestInValid, element.GetAttribute("value"));
         }
     }
 }
