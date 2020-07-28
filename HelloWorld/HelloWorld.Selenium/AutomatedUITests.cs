@@ -24,7 +24,7 @@ namespace HelloWorld.Selenium
             string strTestInValid = "Azure DevOps Sharing!";
             string strTestValid = "Azure DevOps!";
 
-            _driver = new ChromeDriver("C:\\IT\\hello-world-devops\\HelloWorld\\HelloWorld.Selenium");
+            _driver = new ChromeDriver();
             _driver.Navigate().GoToUrl("http://localhost:5000/home/create/");
 
             //Action
