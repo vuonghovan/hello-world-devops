@@ -31,12 +31,12 @@ namespace HelloWorld.Selenium
             _driver.Navigate().GoToUrl(_url);
 
             //Act
-            _driver.FindElement(By.Id("Name")).SendKeys(strTestValid);
+            _driver.FindElement(By.Id("Name")).SendKeys(strTestInValid);
             _driver.FindElement(By.Id("btnCreate")).Click();
 
             var element = _driver.FindElement(By.Id("Name"));
             //Assert
-            Assert.AreEqual(strTestValid, element.GetAttribute("value"));
+            Assert.AreEqual(strTestInValid, element.GetAttribute("value"));
         }
     }
 }
