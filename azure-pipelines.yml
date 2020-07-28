@@ -53,6 +53,14 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
+- task: DotNetCoreCLI@2
+  displayName: Publish Selenium Test
+  inputs:
+    command: 'custom'
+    projects: '*/*HelloWorld.Selenium/*.csproj'
+    custom: 'publish'
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: false
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
   
