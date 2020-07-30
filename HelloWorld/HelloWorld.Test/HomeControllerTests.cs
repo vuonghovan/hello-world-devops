@@ -29,7 +29,7 @@ namespace HelloWorld.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(strTestInValid, model.Name);
+            Assert.AreEqual(strTestValid, model.Name);
         }
 
         [Test]
