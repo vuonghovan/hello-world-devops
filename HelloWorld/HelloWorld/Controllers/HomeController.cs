@@ -36,7 +36,8 @@ namespace HelloWorld.Controllers
 
             if (model.Name.Length > 15)
             {
-                throw new Exception("Max length is 15");
+                ModelState.AddModelError(nameof(model.Name), "Max length is 15");
+                return View(model);
             }
 
             return RedirectToAction(nameof(Edit), new { model.Name });
